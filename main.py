@@ -143,9 +143,9 @@ class Stage:
 		"指が疲れてきたから、この辺で勘弁してネ。",
 		False)
 		self.main_point = 0
-		self.save_file = "save.dat"
+		self.save_file = os.path.dirname(__file__)+"/save.dat"
 	def reset(self):
-		self.bgm.start_bgm("wav/spring.wav")
+		self.bgm.start_bgm(os.path.dirname(__file__)+"/wav/spring.wav")
 		self.page = 0 #ページ移動(小さな画面遷移)
 		self.time = {"t":0, "label":tk.Label(root), "limit":60}
 	def save(self, point):
@@ -211,10 +211,10 @@ class Stage:
 					elif k.upper() == self.p_list[1]:
 						p = True
 					if p:
-						play_audio("wav/true.wav", 3)
+						play_audio(os.path.dirname(__file__)+"/wav/true.wav", 3)
 						self.main_point += 1
 					else:
-						play_audio("wav/false.wav", 100)
+						play_audio(os.path.dirname(__file__)+"/wav/false.wav", 100)
 					#連打長押し対策
 					self.time["t"] += 1
 					if self.time["t"] > self.time["limit"]:
@@ -323,8 +323,8 @@ class Stage:
 def window_head(tk_window, window_size, title, bg_color, resize=False):
 	tk_window.title(title)
 	try:
-		if os.path.exists("favicon.ico"):
-			tk_window.iconbitmap(default="favicon.ico")
+		if os.path.exists(os.path.dirname(__file__)+"/favicon.ico"):
+			tk_window.iconbitmap(default=os.path.dirname(__file__)+"/favicon.ico")
 	except:
 		pass
 	tk_window.geometry(window_size)
